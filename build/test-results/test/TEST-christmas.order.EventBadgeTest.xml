@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="christmas.order.EventBadgeTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2023-11-15T12:11:42" hostname="gimdabomiui-MacBookAir.local" time="0.003">
+  <properties/>
+  <testcase name="1 - 배지 유형: 산타" classname="christmas.order.EventBadgeTest" time="0.001"/>
+  <testcase name="2 - 배지 유형: 트리" classname="christmas.order.EventBadgeTest" time="0.0"/>
+  <testcase name="3 - 배지 유형: 별" classname="christmas.order.EventBadgeTest" time="0.0"/>
+  <testcase name="4 - 배지 유형: 없음" classname="christmas.order.EventBadgeTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="christmas.order.OrderInformationTest" tests="11" skipped="0" failures="0" errors="0" timestamp="2023-11-15T12:11:42" hostname="gimdabomiui-MacBookAir.local" time="0.01">
+  <properties/>
+  <testcase name="[1] a3" classname="christmas.order.OrderInformationTest" time="0.004"/>
+  <testcase name="[2] 40" classname="christmas.order.OrderInformationTest" time="0.001"/>
+  <testcase name="[3] -123" classname="christmas.order.OrderInformationTest" time="0.0"/>
+  <testcase name="날짜 확인" classname="christmas.order.OrderInformationTest" time="0.0"/>
+  <testcase name="주문리스트 확인" classname="christmas.order.OrderInformationTest" time="0.0"/>
+  <testcase name="1 - 주문 내역: [양송이수프2], 예상 결과: ORDER_NOT_VALID_ERROR_MESSAGE" classname="christmas.order.OrderInformationTest" time="0.0"/>
+  <testcase name="2 - 주문 내역: [제로콜라-2, 샴페인-3], 예상 결과: ORDER_NOT_VALID_ERROR_MESSAGE" classname="christmas.order.OrderInformationTest" time="0.0"/>
+  <testcase name="3 - 주문 내역: [티본스테이크-22], 예상 결과: ORDER_NOT_VALID_ERROR_MESSAGE" classname="christmas.order.OrderInformationTest" time="0.0"/>
+  <testcase name="4 - 주문 내역: [티본스테이크-0], 예상 결과: ORDER_NOT_VALID_ERROR_MESSAGE" classname="christmas.order.OrderInformationTest" time="0.0"/>
+  <testcase name="5 - 주문 내역: [티본스테이크-1, 티본스테이크-1], 예상 결과: ORDER_NOT_VALID_ERROR_MESSAGE" classname="christmas.order.OrderInformationTest" time="0.001"/>
+  <testcase name="6 - 주문 내역: [라면-1], 예상 결과: ORDER_NOT_VALID_ERROR_MESSAGE" classname="christmas.order.OrderInformationTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="christmas.order.OrderTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2023-11-15T12:11:42" hostname="gimdabomiui-MacBookAir.local" time="0.001">
+  <properties/>
+  <testcase name="1 - 주문 내역: christmas.domain.order.OrderItem@64b0598, 예상 결과: 220000" classname="christmas.order.OrderTest" time="0.001"/>
+  <testcase name="1 - 주문 내역: christmas.domain.order.OrderItem@18f8cd79, 예상 결과: 4" classname="christmas.order.OrderTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
