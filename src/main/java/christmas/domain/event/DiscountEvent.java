@@ -22,7 +22,7 @@ public enum DiscountEvent {
     WEEKDAY_DISCOUNT {
         @Override
         public int calculateDiscount(Order order, LocalDate date) {
-            if (isWeekday(date)) {
+            if (isWeekday(order, date)) {
                 return order.getTotalQuantityForCategory("디저트") * NumberOfEvent.DISCOUNT_UNIT.getNumberOfEvent();
             }
 
@@ -32,7 +32,7 @@ public enum DiscountEvent {
     WEEKEND_DISCOUNT {
         @Override
         public int calculateDiscount(Order order, LocalDate date) {
-            if (isWeekend(date)) {
+            if (isWeekend(order, date)) {
                 return order.getTotalQuantityForCategory("메인") * NumberOfEvent.DISCOUNT_UNIT.getNumberOfEvent();
             }
 
@@ -70,6 +70,7 @@ public enum DiscountEvent {
         int weekendDiscountAmount = DiscountEvent.WEEKEND_DISCOUNT.calculateDiscount(order, date);
         int specialDiscountAmount = DiscountEvent.SPECIAL_DISCOUNT.calculateDiscount(order, date);
         int champagneGiftAmount = DiscountEvent.GIFT_CHAMPAGNE.calculateDiscount(order, date);
+
         int totalDiscountAmount = christmasDiscountAmount + weekdayDiscountAmount + weekendDiscountAmount + specialDiscountAmount + champagneGiftAmount;
 
         if (order.getTotalAmountBeforeDiscount() < NumberOfEvent.TEN_THOUSAND_WON.getNumberOfEvent()) {
@@ -86,12 +87,12 @@ public enum DiscountEvent {
         return totalBeforeDiscountAmount - totalDiscountAmount + DiscountEvent.GIFT_CHAMPAGNE.calculateDiscount(order, date);
     }
 
-    private static boolean isWeekday(LocalDate date) {
+    private static boolean isWeekday(Order order, LocalDate date) {
         DayOfWeek day = date.getDayOfWeek();
         return day != DayOfWeek.FRIDAY && day != DayOfWeek.SATURDAY;
     }
 
-    private static boolean isWeekend(LocalDate date) {
+    private static boolean isWeekend(Order order, LocalDate date) {
         DayOfWeek day = date.getDayOfWeek();
         return day == DayOfWeek.FRIDAY || day == DayOfWeek.SATURDAY;
     }

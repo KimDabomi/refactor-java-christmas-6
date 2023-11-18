@@ -105,14 +105,13 @@ public class OutputView {
     }
 
     private void showDiscount(Order order, LocalDate date) {
-        showChristmasDiscount(date);
         showWeekdayDiscount(order, date);
-        showWeekendDiscount(date);
-        showSpecialDiscount(date);
+        showWeekendDiscount(order, date);
+        showSpecialDiscount(order, date);
         showChampagneGift(order, date);
     }
 
-    private void showChristmasDiscount(LocalDate date) {
+    private void showChristmasDiscount(Order order, LocalDate date) {
         String christmasDiscountAmount = formatAmount(DiscountEvent.CHRISTMAS_D_DAY.calculateDiscount(order, date));
 
         if (!christmasDiscountAmount.equals(ViewMessage.NONE.getViewMessage())) {
@@ -130,7 +129,7 @@ public class OutputView {
         }
     }
 
-    private void showWeekendDiscount(LocalDate date) {
+    private void showWeekendDiscount(Order order, LocalDate date) {
         String weekendDiscountAmount = formatAmount(DiscountEvent.WEEKEND_DISCOUNT.calculateDiscount(order, date));
 
         if (!weekendDiscountAmount.equals(ViewMessage.NONE.getViewMessage())) {
@@ -139,7 +138,7 @@ public class OutputView {
         }
     }
 
-    private void showSpecialDiscount(LocalDate date) {
+    private void showSpecialDiscount(Order order, LocalDate date) {
         String specialDiscountAmount = formatAmount(DiscountEvent.SPECIAL_DISCOUNT.calculateDiscount(order, date));
 
         if (!specialDiscountAmount.equals(ViewMessage.NONE.getViewMessage())) {
