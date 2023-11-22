@@ -9,6 +9,7 @@ public enum NumberOfEvent {
     DISCOUNT_UNIT(2023),
     CHAMPAGNE_PRICE(25000),
     EVENT_MIN_TOTAL_PRICE(120000);
+
     private final int numberOfEvent;
 
     NumberOfEvent(int numberOfEvent) {

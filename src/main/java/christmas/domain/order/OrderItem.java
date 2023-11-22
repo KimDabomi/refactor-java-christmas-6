@@ -17,7 +17,11 @@ public class OrderItem {
     }
 
     public int getQuantity() {
-        OrderItemException.checkQuantityType(quantity);
+        isValidQuantity(quantity);
         return Integer.parseInt(quantity);
+    }
+
+    private void isValidQuantity(String quantity) {
+        OrderItemException.checkQuantityType(quantity);
     }
 }

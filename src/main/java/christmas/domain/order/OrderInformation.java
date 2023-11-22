@@ -1,16 +1,16 @@
 package christmas.domain.order;
 
 import christmas.domain.exception.OrderException;
-import christmas.domain.exception.OrderInformationException;
+import christmas.domain.exception.OrderDetailsException;
 import christmas.domain.menu.Menu;
 import java.util.List;
 
 public class OrderInformation {
     public static int getDate(String date) {
-        OrderInformationException.checkDateType(date);
+        OrderDetailsException.checkDateType(date);
 
         int visitingDate = Integer.parseInt(date);
-        OrderInformationException.checkDateRange(visitingDate);
+        OrderDetailsException.checkDateRange(visitingDate);
 
         return visitingDate;
     }
@@ -18,7 +18,7 @@ public class OrderInformation {
     public static Order getOrderItems(String[] menuItems, List<OrderItem> orderItemList) {
         for (String item : menuItems) {
             String[] details = item.split("-");
-            OrderInformationException.checkOrderType(menuItems);
+            OrderDetailsException.checkOrderType(menuItems);
 
             String menuName = details[0].trim();
             String quantity = details[1].trim();

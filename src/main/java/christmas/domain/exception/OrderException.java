@@ -2,34 +2,12 @@ package christmas.domain.exception;
 
 import christmas.domain.order.OrderItem;
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class OrderException extends IllegalArgumentException {
-    private static final String numberType = "[+-]?\\d*(\\.\\d+)?";
 
     public OrderException(String errorMessage) {
         super(errorMessage);
-    }
-
-    public static void checkDateType(String date) {
-        if (!date.matches(numberType)) {
-            throw new OrderException(ErrorMessage.DATE_ERROR_MESSAGE.getErrorMessage());
-        }
-    }
-
-    public static void checkDateRange(int date) {
-        if (date < NumberOfException.MIN_DATE.getNumber() || date > NumberOfException.MAX_DATE.getNumber()) {
-            throw new OrderException(ErrorMessage.DATE_ERROR_MESSAGE.getErrorMessage());
-        }
-    }
-
-    public static void checkOrderType(String[] menuItems) {
-        for (String menuItem : menuItems) {
-            String[] details = menuItem.split("-");
-
-            if (details.length != NumberOfException.ORDER_LIST_SIZE.getNumber()) {
-                throw new OrderException(ErrorMessage.ORDER_NOT_VALID_ERROR_MESSAGE.getErrorMessage());
-            }
-        }
     }
 
     public static void checkOrderItemExceptions(List<OrderItem> orderItemList) {
@@ -40,26 +18,14 @@ public class OrderException extends IllegalArgumentException {
     }
 
     private static void checkOnlyDrink(List<OrderItem> orderItemList) {
-        boolean allDrinks = true;
-
-        for (OrderItem orderItem : orderItemList) {
-            if (!orderItem.getMenu().getCategory().equals("음료")) {
-                allDrinks = false;
-                break;
-            }
-        }
-
-        if (allDrinks) {
-            throw new OrderException(ErrorMessage.ORDER_NOT_VALID_ERROR_MESSAGE.getErrorMessage());
-        }
+        orderItemList.stream()
+                .filter(orderItem -> !"음료".equals(orderItem.getMenu().getCategory()))
+                .findAny()
+                .orElseThrow(() -> new OrderException(ErrorMessage.ORDER_NOT_VALID_ERROR_MESSAGE.getErrorMessage()));
     }
 
     private static void checkTotalQuantity(List<OrderItem> orderItemList) {
-        int totalQuantity = 0;
-
-        for (OrderItem orderItem : orderItemList) {
-            totalQuantity += orderItem.getQuantity();
-        }
+        int totalQuantity = orderItemList.stream().mapToInt(OrderItem::getQuantity).sum();
 
         if (totalQuantity > NumberOfException.MAX_QUANTITY.getNumber()) {
             throw new OrderException(ErrorMessage.ORDER_NOT_VALID_ERROR_MESSAGE.getErrorMessage());
@@ -67,18 +33,20 @@ public class OrderException extends IllegalArgumentException {
     }
 
     private static void checkQuantityRange(List<OrderItem> orderItemList) {
-        for (OrderItem orderItem : orderItemList) {
-            if (orderItem.getQuantity() < NumberOfException.MIN_QUANTITY.getNumber()) {
-                throw new OrderException(ErrorMessage.ORDER_NOT_VALID_ERROR_MESSAGE.getErrorMessage());
-            }
+        int orderItemQuantity = orderItemList.stream().mapToInt(OrderItem::getQuantity).sum();
+
+        if (orderItemQuantity < NumberOfException.MIN_QUANTITY.getNumber()) {
+            throw new OrderException(ErrorMessage.ORDER_NOT_VALID_ERROR_MESSAGE.getErrorMessage());
         }
     }
 
     private static void checkDuplicationMenu(List<OrderItem> orderItemList) {
-        for (int i = 0; i < orderItemList.size() - 1; i++) {
-            if (orderItemList.get(i).getMenu().getFoodName().equals(orderItemList.get(i + 1).getMenu().getFoodName())) {
-                throw new OrderException(ErrorMessage.ORDER_NOT_VALID_ERROR_MESSAGE.getErrorMessage());
-            }
-        }
+        IntStream.range(0, orderItemList.size() - 1)
+                .filter(i -> orderItemList.get(i).getMenu().getFoodName()
+                        .equals(orderItemList.get(i + 1).getMenu().getFoodName()))
+                .findAny()
+                .ifPresent(i -> {
+                    throw new OrderException(ErrorMessage.ORDER_NOT_VALID_ERROR_MESSAGE.getErrorMessage());
+                });
     }
 }

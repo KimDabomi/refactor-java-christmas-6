@@ -20,12 +20,6 @@ public class OrderTest {
         );
     }
 
-    private static Stream<Arguments> provideOrderAmountTestData() {
-        return Stream.of(
-                Arguments.of(new OrderItem(Menu.T_BONE_STEAK, "4"), 220000)
-        );
-    }
-
     @ParameterizedTest(name = "{index} - 주문 내역: {0}, 예상 결과: {1}")
     @MethodSource("provideOrderQuantityTestData")
     @DisplayName("카테고리 개수 확인")
@@ -36,6 +30,12 @@ public class OrderTest {
         int categoryQuantity = order.getTotalQuantityForCategory("메인");
 
         assertThat(categoryQuantity).isEqualTo(expected);
+    }
+
+    private static Stream<Arguments> provideOrderAmountTestData() {
+        return Stream.of(
+                Arguments.of(new OrderItem(Menu.T_BONE_STEAK, "4"), 220000)
+        );
     }
 
     @ParameterizedTest(name = "{index} - 주문 내역: {0}, 예상 결과: {1}")
