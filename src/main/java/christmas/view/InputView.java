@@ -13,15 +13,15 @@ public class InputView {
     }
 
     public String readDate() {
-        System.out.println(ViewMessage.START_MESSAGE.getViewMessage());
-        System.out.println(ViewMessage.ASK_DATE_MESSAGE.getViewMessage());
+        System.out.println(InputViewMessage.START_MESSAGE.getInputViewMessage());
+        System.out.println(InputViewMessage.ASK_DATE_MESSAGE.getInputViewMessage());
 
         return Console.readLine();
     }
 
     public Order readMenuOrder() {
-        System.out.println(ViewMessage.ASK_ORDER_MENU_QUANTITY_MESSAGE.getViewMessage());
-        String[] menuItems = Console.readLine().split(ViewMessage.SPLIT_CRITERIA.getViewMessage());
+        System.out.println(InputViewMessage.ASK_ORDER_MENU_QUANTITY_MESSAGE.getInputViewMessage());
+        String[] menuItems = Console.readLine().split(InputViewMessage.SPLIT_CRITERIA.getInputViewMessage());
         List<OrderItem> orderItemList = new ArrayList<>();
 
         return OrderInformation.getOrderItems(menuItems, orderItemList);

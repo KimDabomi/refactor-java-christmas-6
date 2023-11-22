@@ -20,64 +20,64 @@ public class OutputView {
     }
 
     public void showEventPreview(int date) {
-        System.out.printf(ViewMessage.SHOW_PREVIEW_EVENT_MESSAGE.getViewMessage(), date);
+        System.out.printf(OutputViewMessage.SHOW_PREVIEW_EVENT_MESSAGE.getOutputViewMessage(), date);
         System.out.println();
     }
 
     public void showOrderList(Order order) {
         if (order != null) {
-            System.out.println(ViewMessage.SHOW_ORDER_MENU_MESSAGE.getViewMessage());
+            System.out.println(OutputViewMessage.SHOW_ORDER_MENU_MESSAGE.getOutputViewMessage());
             order.printOrderList();
         }
     }
 
     public void showTotalAmountBeforeDiscount(Order order) {
         if (order != null) {
-            System.out.println(ViewMessage.SHOW_BEFORE_DISCOUNT_AMOUNT_MESSAGE.getViewMessage());
+            System.out.println(OutputViewMessage.SHOW_BEFORE_DISCOUNT_AMOUNT_MESSAGE.getOutputViewMessage());
             String totalAmountBeforeDiscount = formatAmount(order.getTotalAmountBeforeDiscount());
-            System.out.printf(ViewMessage.SHOW_STRING_AMOUNT_MESSAGE.getViewMessage(), totalAmountBeforeDiscount);
+            System.out.printf(OutputViewMessage.SHOW_STRING_AMOUNT_MESSAGE.getOutputViewMessage(), totalAmountBeforeDiscount);
             System.out.println();
         }
     }
 
     public void showGiftMenu(Order order, LocalDate date) {
         int champagneDiscount = DiscountEvent.GIFT_CHAMPAGNE.calculateDiscount(order, date);
-        System.out.println(ViewMessage.SHOW_GIFT_TITLE_MESSAGE.getViewMessage());
+        System.out.println(OutputViewMessage.SHOW_GIFT_TITLE_MESSAGE.getOutputViewMessage());
 
         if (champagneDiscount > NumberOfEvent.ZERO.getNumberOfEvent()) {
-            System.out.println(ViewMessage.SHOW_GIFT_MENU_MESSAGE.getViewMessage());
+            System.out.println(OutputViewMessage.SHOW_GIFT_MENU_MESSAGE.getOutputViewMessage());
         }
 
         if (champagneDiscount == NumberOfEvent.ZERO.getNumberOfEvent()){
-            System.out.println(ViewMessage.SHOW_NONE_MESSAGE.getViewMessage());
+            System.out.println(OutputViewMessage.SHOW_NONE_MESSAGE.getOutputViewMessage());
         }
     }
 
     public void showDiscountList(Order order, LocalDate date) {
-        System.out.println(ViewMessage.SHOW_EVENT_LIST_TITLE_MESSAGE.getViewMessage());
+        System.out.println(OutputViewMessage.SHOW_EVENT_LIST_TITLE_MESSAGE.getOutputViewMessage());
 
         if (order.getTotalAmountBeforeDiscount() >= NumberOfEvent.TEN_THOUSAND_WON.getNumberOfEvent()) {
             showDiscount(order, date);
         }
 
         if (order.getTotalAmountBeforeDiscount() < NumberOfEvent.TEN_THOUSAND_WON.getNumberOfEvent()) {
-            System.out.println(ViewMessage.SHOW_NONE_MESSAGE.getViewMessage());
+            System.out.println(OutputViewMessage.SHOW_NONE_MESSAGE.getOutputViewMessage());
         }
     }
 
     public void showTotalDiscountAmount(Order order, LocalDate date) {
-        System.out.println(ViewMessage.SHOW_TOTAL_EVENT_TITLE_MESSAGE.getViewMessage());
+        System.out.println(OutputViewMessage.SHOW_TOTAL_EVENT_TITLE_MESSAGE.getOutputViewMessage());
         int totalAmount = DiscountEvent.getTotalDiscountAmount(order, date);
         String totalDiscountAmount = formatAmount(totalAmount);
 
         if (order.getTotalAmountBeforeDiscount() >= NumberOfEvent.TEN_THOUSAND_WON.getNumberOfEvent()) {
-            System.out.printf(ViewMessage.SHOW_MINUS_AMOUNT_MESSAGE.getViewMessage(), totalDiscountAmount);
+            System.out.printf(OutputViewMessage.SHOW_MINUS_AMOUNT_MESSAGE.getOutputViewMessage(), totalDiscountAmount);
             System.out.println();
         }
 
         if (order.getTotalAmountBeforeDiscount() < NumberOfEvent.TEN_THOUSAND_WON.getNumberOfEvent()) {
             totalAmount = 0;
-            System.out.printf(ViewMessage.SHOW_INT_AMOUNT_MESSAGE.getViewMessage(), totalAmount);
+            System.out.printf(OutputViewMessage.SHOW_INT_AMOUNT_MESSAGE.getOutputViewMessage(), totalAmount);
             System.out.println();
         }
     }
@@ -86,21 +86,21 @@ public class OutputView {
         int finalAmount = DiscountEvent.getTotalAmount(order, date);
         String totalFinalAmount = formatAmount(finalAmount);
 
-        System.out.println(ViewMessage.SHOW_FINAL_AMOUNT_MESSAGE.getViewMessage());
-        System.out.printf(ViewMessage.SHOW_STRING_AMOUNT_MESSAGE.getViewMessage(), totalFinalAmount);
+        System.out.println(OutputViewMessage.SHOW_FINAL_AMOUNT_MESSAGE.getOutputViewMessage());
+        System.out.printf(OutputViewMessage.SHOW_STRING_AMOUNT_MESSAGE.getOutputViewMessage(), totalFinalAmount);
     }
 
     public void showBadge(Order order, LocalDate date) {
         int totalAmount = DiscountEvent.getTotalDiscountAmount(order, date);
         System.out.println();
-        System.out.println(ViewMessage.SHOW_BADGE_MESSAGE.getViewMessage());
+        System.out.println(OutputViewMessage.SHOW_BADGE_MESSAGE.getOutputViewMessage());
 
         if (totalAmount > 0) {
             System.out.println(EventBadge.getBadgeForDiscount(totalAmount));
         }
 
         if (totalAmount == 0) {
-            System.out.println(ViewMessage.SHOW_NONE_MESSAGE.getViewMessage());
+            System.out.println(OutputViewMessage.SHOW_NONE_MESSAGE.getOutputViewMessage());
         }
     }
 
@@ -114,8 +114,8 @@ public class OutputView {
     private void showChristmasDiscount(Order order, LocalDate date) {
         String christmasDiscountAmount = formatAmount(DiscountEvent.CHRISTMAS_D_DAY.calculateDiscount(order, date));
 
-        if (!christmasDiscountAmount.equals(ViewMessage.NONE.getViewMessage())) {
-            System.out.printf(ViewMessage.SHOW_CHRISTMAS_EVENT_MESSAGE.getViewMessage(), christmasDiscountAmount);
+        if (!christmasDiscountAmount.equals(OutputViewMessage.NONE.getOutputViewMessage())) {
+            System.out.printf(OutputViewMessage.SHOW_CHRISTMAS_EVENT_MESSAGE.getOutputViewMessage(), christmasDiscountAmount);
             System.out.println();
         }
     }
@@ -123,8 +123,8 @@ public class OutputView {
     private void showWeekdayDiscount(Order order, LocalDate date) {
         String weekdayDiscountAmount = formatAmount(DiscountEvent.WEEKDAY_DISCOUNT.calculateDiscount(order, date));
 
-        if (!weekdayDiscountAmount.equals(ViewMessage.NONE.getViewMessage())) {
-            System.out.printf(ViewMessage.SHOW_WEEKDAY_EVENT_MESSAGE.getViewMessage(), weekdayDiscountAmount);
+        if (!weekdayDiscountAmount.equals(OutputViewMessage.NONE.getOutputViewMessage())) {
+            System.out.printf(OutputViewMessage.SHOW_WEEKDAY_EVENT_MESSAGE.getOutputViewMessage(), weekdayDiscountAmount);
             System.out.println();
         }
     }
@@ -132,8 +132,8 @@ public class OutputView {
     private void showWeekendDiscount(Order order, LocalDate date) {
         String weekendDiscountAmount = formatAmount(DiscountEvent.WEEKEND_DISCOUNT.calculateDiscount(order, date));
 
-        if (!weekendDiscountAmount.equals(ViewMessage.NONE.getViewMessage())) {
-            System.out.printf(ViewMessage.SHOW_WEEKEND_EVENT_MESSAGE.getViewMessage(), weekendDiscountAmount);
+        if (!weekendDiscountAmount.equals(OutputViewMessage.NONE.getOutputViewMessage())) {
+            System.out.printf(OutputViewMessage.SHOW_WEEKEND_EVENT_MESSAGE.getOutputViewMessage(), weekendDiscountAmount);
             System.out.println();
         }
     }
@@ -141,8 +141,8 @@ public class OutputView {
     private void showSpecialDiscount(Order order, LocalDate date) {
         String specialDiscountAmount = formatAmount(DiscountEvent.SPECIAL_DISCOUNT.calculateDiscount(order, date));
 
-        if (!specialDiscountAmount.equals(ViewMessage.NONE.getViewMessage())) {
-            System.out.printf(ViewMessage.SHOW_SPECIAL_EVENT_MESSAGE.getViewMessage(), specialDiscountAmount);
+        if (!specialDiscountAmount.equals(OutputViewMessage.NONE.getOutputViewMessage())) {
+            System.out.printf(OutputViewMessage.SHOW_SPECIAL_EVENT_MESSAGE.getOutputViewMessage(), specialDiscountAmount);
             System.out.println();
         }
     }
@@ -150,14 +150,14 @@ public class OutputView {
     private void showChampagneGift(Order order, LocalDate date) {
         String champagneGiftAmount = formatAmount(DiscountEvent.GIFT_CHAMPAGNE.calculateDiscount(order, date));
 
-        if (!champagneGiftAmount.equals(ViewMessage.NONE.getViewMessage())) {
-            System.out.printf(ViewMessage.SHOW_GIFT_EVENT_MESSAGE.getViewMessage(), champagneGiftAmount);
+        if (!champagneGiftAmount.equals(OutputViewMessage.NONE.getOutputViewMessage())) {
+            System.out.printf(OutputViewMessage.SHOW_GIFT_EVENT_MESSAGE.getOutputViewMessage(), champagneGiftAmount);
             System.out.println();
         }
     }
 
     private String formatAmount(int amount) {
-        DecimalFormat decFormat = new DecimalFormat(ViewMessage.AMOUNT_FORMAT.getViewMessage());
+        DecimalFormat decFormat = new DecimalFormat(OutputViewMessage.AMOUNT_FORMAT.getOutputViewMessage());
         return decFormat.format(amount);
     }
 }

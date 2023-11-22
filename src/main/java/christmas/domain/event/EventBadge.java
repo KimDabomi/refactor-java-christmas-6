@@ -1,6 +1,6 @@
 package christmas.domain.event;
 
-import christmas.view.ViewMessage;
+import christmas.view.OutputViewMessage;
 import java.util.function.Predicate;
 
 public enum EventBadge {
@@ -23,6 +23,6 @@ public enum EventBadge {
             }
         }
 
-        return ViewMessage.SHOW_NONE_MESSAGE.getViewMessage();
+        return OutputViewMessage.SHOW_NONE_MESSAGE.getOutputViewMessage();
     }
 }

@@ -1,9 +1,6 @@
 package christmas.view;
 
-public enum ViewMessage {
-    START_MESSAGE("안녕하세요! 우테코 식당 12월 이벤트 플래너입니다."),
-    ASK_DATE_MESSAGE("12월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)"),
-    ASK_ORDER_MENU_QUANTITY_MESSAGE("주문하실 메뉴와 개수를 알려 주세요. (e.g. 해산물파스타-2,레드와인-1,초코케이크-1)"),
+public enum OutputViewMessage {
     SHOW_PREVIEW_EVENT_MESSAGE("12월 %d일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!"),
     SHOW_ORDER_MENU_MESSAGE("\n<주문 메뉴>"),
     SHOW_BEFORE_DISCOUNT_AMOUNT_MESSAGE("<할인 전 총주문 금액>"),
@@ -22,17 +19,16 @@ public enum ViewMessage {
     SHOW_MINUS_AMOUNT_MESSAGE("-%s원"),
     SHOW_INT_AMOUNT_MESSAGE("%d원"),
     SHOW_STRING_AMOUNT_MESSAGE("%s원"),
-    SPLIT_CRITERIA(","),
     NONE("0"),
     AMOUNT_FORMAT("###,###");
 
-    private final String viewMessage;
+    private final String outputViewMessage;
 
-    ViewMessage(String viewMessage) {
-        this.viewMessage = viewMessage;
+    OutputViewMessage(String outputViewMessage) {
+        this.outputViewMessage = outputViewMessage;
     }
 
-    public String getViewMessage() {
-        return viewMessage;
+    public String getOutputViewMessage() {
+        return outputViewMessage;
     }
 }
