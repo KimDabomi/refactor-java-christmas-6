@@ -1,6 +1,7 @@
 package christmas.domain.menu;
 
 import christmas.domain.exception.ErrorMessage;
+import java.util.Arrays;
 
 public enum Menu {
     MUSHROOM_SOUP(Category.APPETIZER, "양송이수프", 6000),
@@ -46,11 +47,9 @@ public enum Menu {
     }
 
     public static Menu of(final String foodName) {
-        for (Menu menu : Menu.values()) {
-            if (menu.getFoodName().equalsIgnoreCase(foodName)) {
-                return menu;
-            }
-        }
-        throw new IllegalArgumentException(ErrorMessage.ORDER_NOT_VALID_ERROR_MESSAGE.getErrorMessage());
+        return Arrays.stream(Menu.values())
+                .filter(menu -> menu.getFoodName().equalsIgnoreCase(foodName))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.ORDER_NOT_VALID_ERROR_MESSAGE.getErrorMessage()));
     }
 }

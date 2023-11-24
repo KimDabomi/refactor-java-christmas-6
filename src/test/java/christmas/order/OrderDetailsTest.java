@@ -4,7 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import christmas.domain.exception.ErrorMessage;
-import christmas.domain.order.OrderInformation;
+import christmas.domain.order.OrderDetails;
 import christmas.domain.order.OrderItem;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +16,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-public class OrderInformationTest {
+public class OrderDetailsTest {
     private static Stream<Arguments> provideOrderExceptionsTestData() {
         return Stream.of(
                 Arguments.of(new String[]{"양송이수프2"}, ErrorMessage.ORDER_NOT_VALID_ERROR_MESSAGE),
@@ -32,7 +32,7 @@ public class OrderInformationTest {
     @ValueSource(strings = {"a3", "40", "-123"})
     @DisplayName("형식에 벗어난 날짜를 입력한 경우 예외 확인")
     void getDate_범위가_아닌_날짜(String date) {
-        assertThatThrownBy(() -> OrderInformation.getDate(date))
+        assertThatThrownBy(() -> OrderDetails.getDate(date))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ErrorMessage.DATE_ERROR_MESSAGE.getErrorMessage());
     }
@@ -42,7 +42,7 @@ public class OrderInformationTest {
     @DisplayName("주문 예외 상황 테스트")
     void testOrderExceptions(String[] menuItems, ErrorMessage errorMessage) {
         List<OrderItem> actualOrderItems = new ArrayList<>();
-        assertThatThrownBy(() -> OrderInformation.getOrderItems(menuItems, actualOrderItems))
+        assertThatThrownBy(() -> OrderDetails.getOrderItems(menuItems, actualOrderItems))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(errorMessage.getErrorMessage());
     }
@@ -51,7 +51,7 @@ public class OrderInformationTest {
     @DisplayName("날짜 확인")
     void getDate_확인() {
         String date = "3";
-        int resultDate = OrderInformation.getDate(date);
+        int resultDate = OrderDetails.getDate(date);
         assertThat(resultDate).isEqualTo(3);
     }
 
@@ -60,7 +60,7 @@ public class OrderInformationTest {
     void getOrderItems_주문리스트_확인() {
         String[] menuItems = {"양송이수프-2", "티본스테이크-3"};
         List<OrderItem> actualOrderItems = new ArrayList<>();
-        OrderInformation.getOrderItems(menuItems, actualOrderItems);
+        OrderDetails.getOrderItems(menuItems, actualOrderItems);
         assertThat(actualOrderItems.size()).isEqualTo(2);
 
         assertThat(actualOrderItems.get(0).getMenu().getCategory()).isEqualTo("에피타이저");

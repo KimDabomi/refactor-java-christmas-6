@@ -5,7 +5,7 @@ import christmas.domain.exception.OrderDetailsException;
 import christmas.domain.menu.Menu;
 import java.util.List;
 
-public class OrderInformation {
+public class OrderDetails {
     public static int getDate(String date) {
         OrderDetailsException.checkDateType(date);
 

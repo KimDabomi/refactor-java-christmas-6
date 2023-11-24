@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 public class OrderException extends IllegalArgumentException {
-
     public OrderException(String errorMessage) {
         super(errorMessage);
     }

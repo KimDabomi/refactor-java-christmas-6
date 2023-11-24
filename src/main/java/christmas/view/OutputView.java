@@ -105,6 +105,7 @@ public class OutputView {
     }
 
     private void showDiscount(Order order, LocalDate date) {
+        showChristmasDiscount(order, date);
         showWeekdayDiscount(order, date);
         showWeekendDiscount(order, date);
         showSpecialDiscount(order, date);

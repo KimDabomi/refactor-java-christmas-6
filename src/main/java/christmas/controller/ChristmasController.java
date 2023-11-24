@@ -1,7 +1,7 @@
 package christmas.controller;
 
 import christmas.domain.order.Order;
-import christmas.domain.order.OrderInformation;
+import christmas.domain.order.OrderDetails;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 import java.time.LocalDate;
@@ -30,7 +30,7 @@ public class ChristmasController {
     private void processOrder() {
         executeWithRetry(() -> {
             String dateInput = inputView.readDate();
-            int date = OrderInformation.getDate(dateInput);
+            int date = OrderDetails.getDate(dateInput);
             LocalDate localDate = LocalDate.ofEpochDay(date);
 
             processEvent(date, localDate);
@@ -72,10 +72,11 @@ public class ChristmasController {
         outputView.showBadge(order, date);
     }
 
-    private <T> T executeWithRetry(Supplier<T> action) {
+    private <T> void executeWithRetry(Supplier<T> action) {
         while (true) {
             try {
-                return action.get();
+                action.get();
+                return;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }

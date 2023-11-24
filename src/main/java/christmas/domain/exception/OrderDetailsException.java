@@ -1,20 +1,15 @@
 package christmas.domain.exception;
 
 import java.util.Arrays;
-import java.util.Optional;
 import java.util.stream.IntStream;
 
 public class OrderDetailsException extends IllegalArgumentException{
-    private static final String numberType = "[+-]?\\d*(\\.\\d+)?";
-
     public OrderDetailsException(String errorMessage) {
         super(errorMessage);
     }
     
     public static void checkDateType(String date) {
-        Optional.ofNullable(date)
-                .filter(d -> d.matches(numberType))
-                .orElseThrow(() -> new OrderDetailsException(ErrorMessage.DATE_ERROR_MESSAGE.getErrorMessage()));
+        CheckTypeOfNumber.checkTypeOfNumber(date, ErrorMessage.DATE_ERROR_MESSAGE);
     }
 
     public static void checkDateRange(int date) {
